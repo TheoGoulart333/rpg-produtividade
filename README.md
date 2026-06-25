@@ -2,7 +2,7 @@
 
 > Gerenciador de tarefas com sistema de XP e níveis progressivos, desenvolvido para demonstrar manipulação de estado, persistência no front-end e separação de responsabilidades — sem frameworks externos.
 
-![screenshot]<img width="1466" height="494" alt="rpg-tela-1" src="https://github.com/user-attachments/assets/41065ffc-46a0-4adc-b23d-6a37660bd433" />
+<img width="1466" height="494" alt="rpg-tela-1" src="https://github.com/user-attachments/assets/41065ffc-46a0-4adc-b23d-6a37660bd433" />
 
 
 
