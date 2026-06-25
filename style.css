@@ -1,0 +1,394 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-page:        #0f1117;
+  --bg-surface:     #181c27;
+  --bg-card:        #1e2333;
+  --bg-input:       #242840;
+  --border:         rgba(255,255,255,.08);
+  --border-hover:   rgba(255,255,255,.16);
+
+  --accent:         #e8a838;  
+  --accent-dim:     rgba(232,168,56,.15);
+  --accent-text:    #f5c05a;
+
+  --text-primary:   #e8eaf0;
+  --text-secondary: #8c90a0;
+  --text-tertiary:  #555968;
+
+  --success-bg:     rgba(52,199,89,.12);
+  --success-text:   #4cd964;
+  --warning-bg:     rgba(232,168,56,.14);
+  --warning-text:   #e8a838;
+  --danger-bg:      rgba(255,69,58,.12);
+  --danger-text:    #ff5f52;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Cascadia Code', 'Fira Mono', monospace;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── HUD ─────────────────────────────────────────────────── */
+
+.hud {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+}
+
+.hud-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1.1rem;
+}
+
+.avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  border: 1.5px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.hud-info { flex: 1; min-width: 0; }
+
+.level-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin-bottom: 2px;
+}
+
+.level-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Status */
+
+.stats-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+}
+
+.stat-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-pill b {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Barra de XP */
+
+.xp-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.xp-label { font-size: 12px; color: var(--text-secondary); }
+
+.xp-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-text);
+  font-family: var(--font-mono);
+}
+
+.xp-bar-bg {
+  height: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width .6s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Título da seção ───────────────────────────────────────── */
+
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+}
+
+/* ── Input row ───────────────────────────────────────────── */
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.input-row input,
+.input-row select {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 14px;
+  height: 42px;
+  padding: 0 14px;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.input-row input { flex: 1; min-width: 160px; }
+.input-row select { min-width: 148px; cursor: pointer; }
+
+.input-row input::placeholder { color: var(--text-tertiary); }
+
+.input-row input:focus,
+.input-row select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.btn-add {
+  height: 42px;
+  padding: 0 18px;
+  background: var(--accent);
+  color: #1a1000;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity .15s, transform .1s;
+}
+
+.btn-add:hover { opacity: .88; }
+.btn-add:active { transform: scale(.97); }
+
+/* ── Erro ───────────────────────────────────────────────── */
+
+.error-msg {
+  font-size: 13px;
+  color: var(--danger-text);
+  margin-top: 8px;
+  min-height: 18px;
+}
+
+/* ── Abas de filtro ─────────────────────────────────────────── */
+
+.filter-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.tab {
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-family: var(--font);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all .15s;
+}
+
+.tab:hover { border-color: var(--border-hover); color: var(--text-primary); }
+
+.tab.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+/* ── Lista de tarefas ───────────────────────────────────────────── */
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.task-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: .85rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: opacity .3s;
+}
+
+.task-card.done { opacity: .5; }
+.task-card.done .task-text {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.check-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-hover);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: all .2s;
+  color: transparent;
+}
+
+.task-card.done .check-btn {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #1a1000;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.xp-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  border: 1px solid transparent;
+}
+
+.xp-badge.easy    { background: var(--success-bg); color: var(--success-text); }
+.xp-badge.medium  { background: var(--warning-bg); color: var(--warning-text); }
+.xp-badge.hard    { background: var(--danger-bg);  color: var(--danger-text);  }
+
+.del-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-tertiary);
+  font-size: 16px;
+  padding: 2px 4px;
+  line-height: 1;
+  border-radius: var(--radius-sm);
+  transition: color .15s, background .15s;
+}
+
+.del-btn:hover {
+  color: var(--danger-text);
+  background: var(--danger-bg);
+}
+
+/* ── Estado vazio ─────────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.empty-state-icon { font-size: 32px; display: block; margin-bottom: 10px; }
+
+/* ── Toast ───────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  font-size: 14px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s;
+  z-index: 100;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ── Responsividade ──────────────────────────────────────── */
+@media (max-width: 480px) {
+  body { padding: 1rem .75rem 3rem; }
+  .input-row { flex-direction: column; }
+  .input-row input,
+  .input-row select,
+  .btn-add { width: 100%; }
+}

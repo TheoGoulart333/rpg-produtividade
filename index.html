@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gamified Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="hud" aria-label="Painel do jogador">
+      <div class="hud-top">
+        <div class="avatar" id="avatar" aria-hidden="true">⚔️</div>
+        <div class="hud-info">
+          <div class="level-label" id="level-label">Nível 1</div>
+          <div class="level-name" id="level-name">Iniciante</div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-pill"><span aria-hidden="true">✅</span> <b id="stat-done">0</b> concluídas</div>
+        <div class="stat-pill"><span aria-hidden="true">🗂️</span> <b id="stat-total">0</b> total</div>
+        <div class="stat-pill"><span aria-hidden="true">🔥</span> <b id="stat-xp">0</b> XP</div>
+      </div>
+
+      <div class="xp-section">
+        <div class="xp-header">
+          <span class="xp-label">Progresso para o próximo nível</span>
+          <span class="xp-value" id="xp-fraction">0 / 50 XP</span>
+        </div>
+        <div
+          class="xp-bar-bg"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          id="xp-bar-container"
+        >
+          <div class="xp-bar-fill" id="xp-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </header>
+
+    <section aria-label="Adicionar tarefa">
+      <p class="section-title">Nova missão</p>
+      <div class="input-row">
+        <input
+          type="text"
+          id="task-input"
+          placeholder="Descreva a tarefa…"
+          maxlength="120"
+          aria-label="Descrição da tarefa"
+          autocomplete="off"
+        />
+        <select id="diff-select" aria-label="Dificuldade da tarefa">
+          <option value="easy">Fácil · 10 XP</option>
+          <option value="medium" selected>Médio · 25 XP</option>
+          <option value="hard">Difícil · 50 XP</option>
+        </select>
+        <button class="btn-add" id="add-btn">+ Adicionar</button>
+      </div>
+      <div class="error-msg" id="error-msg" role="alert" aria-live="polite"></div>
+    </section>
+
+    <section aria-label="Lista de tarefas">
+      <div class="filter-tabs" role="tablist">
+        <button class="tab active" data-filter="all" role="tab" aria-selected="true">Todas</button>
+        <button class="tab" data-filter="pending" role="tab" aria-selected="false">Pendentes</button>
+        <button class="tab" data-filter="done" role="tab" aria-selected="false">Concluídas</button>
+      </div>
+      <div class="task-list" id="task-list" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
